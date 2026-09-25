@@ -1,0 +1,195 @@
+name: PrivateMines
+version: 1.0.0
+author: Garfieldd_54
+api-version: '1.21'
+main: fr.garfield.privatemines.PrivateMines
+description: Plugin de mines privees par joueur pour serveur Prison.
+depend: [ProtocolLib, Vault]
+softdepend: [HeadDB]
+
+commands:
+  mine:
+    description: Teleporte le joueur a sa mine privee (la cree si besoin).
+    usage: /mine
+  spawn:
+    description: Teleporte le joueur au spawn.
+    usage: /spawn
+  setspawn:
+    description: Definit le spawn a la position actuelle (admin).
+    usage: /setspawn
+    permission: privatemines.setspawn
+  money:
+    description: Affiche ton solde, ou fixe celui d'un joueur (/money set <joueur> <montant>, OP).
+    usage: /money [set <joueur> <montant>]
+    aliases: [bal, balance, argent]
+  zone:
+    description: Gere les zones protegees (admin).
+    usage: /zone <create|pos1|pos2|list|delete|info>
+    permission: privatemines.zone
+  shop:
+    description: Ouvre le shop pour acheter des blocs.
+    usage: /shop
+  bp:
+    description: Ouvre ton backpack (stockage de blocs achetés).
+    usage: /bp
+  givemoney:
+    description: Donne de l'argent a un joueur (admin).
+    usage: /givemoney <joueur> <montant>
+    permission: privatemines.setspawn
+  resetenchants:
+    description: Remet a 0 les enchants de ta pioche (admin).
+    usage: /resetenchants [joueur]
+    aliases: [resetench, reseten]
+  resetsac:
+    description: Reinitialise ton sac (niveaux a 1, stock vide) (admin).
+    usage: /resetsac [joueur]
+    aliases: [resetbag]
+  resetarmures:
+    description: Retire toutes les armures d'Oublie (admin).
+    usage: /resetarmures [joueur]
+    aliases: [resetarmure, resetarmors]
+  resetordi:
+    description: Remet l'Ordinateur Quantique a zero - compteur de recyclage + tri auto (Fragments conserves).
+    usage: /resetordi [joueur]
+    aliases: [resetordinateur]
+  resetfragment:
+    description: Remet le solde de Fragments de Souvenir a 0 (recyclages et tri auto conserves).
+    usage: /resetfragment [joueur]
+    aliases: [resetfragments]
+  resetbv:
+    description: Remet a zero les stats du menu /bv (admin).
+    usage: /resetbv [joueur]
+    aliases: [resetblockvalue, resetstatsblocs]
+  resetmines:
+    description: Reverrouille les mines B et C (admin).
+    usage: /resetmines [joueur]
+  resetlevelpioche:
+    description: Remet le niveau de pioche (barre d'XP) a 1 (admin).
+    usage: /resetlevelpioche [joueur]
+    aliases: [resetpiochelevel, resetpioche]
+  ah:
+    description: Hotel des ventes entre joueurs.
+    usage: /ah | /ah sell <prix>
+    aliases: [hdv, auction]
+  coinflip:
+    description: Pile ou face entre joueurs (paris d'argent).
+    usage: /coinflip | /coinflip <mise>
+    aliases: [cf, pileface]
+  testgames:
+    description: (OP) Force une partie des mini-jeux de chat.
+    usage: /testgames [calcul|nombre|stop]
+    permission: privatemines.testgames
+  end:
+    description: TP a la salle d'attente de l'End (event du Dragon a 20h).
+    usage: /end
+  spawner:
+    description: Outils lies aux spawners d'ile - OP.
+    usage: /spawner tool [joueur]
+  holo:
+    description: Gere les hologrammes (Text Display natifs) - OP.
+    usage: /holo create <nom> puis /holo edit <nom> (menu) | movehere | delete | list
+    aliases: [hologram, hologramme]
+  classements:
+    description: Ouvre le menu des classements (argent, progression, blocs, enchants).
+    usage: /classements
+    aliases: [classement, top, baltop]
+  blockvalue:
+    description: Affiche le prix de tes blocs (avec ton bonus) dans ta mine actuelle.
+    usage: /blockvalue
+    aliases: [bv, valeur]
+  bvn:
+    description: Souhaite la bienvenue aux nouveaux joueurs (+2% de ton solde).
+    usage: /bvn
+    aliases: [bienvenue, welcome]
+  guide:
+    description: Affiche ou masque la BossBar de guide (astuces).
+    usage: /guide
+  quest:
+    description: Ouvre le hub des quetes (quotidiennes + quete d'histoire).
+    usage: /quest
+    aliases: [quete, quetes, quests]
+  stats:
+    description: Affiche tous tes bonus en pourcentage.
+    usage: /stats
+    aliases: [stat, bonus]
+  banque:
+    description: Ouvre la banque de ton ile (depot fer/or -> niveau).
+    usage: /banque
+    aliases: [bank]
+  intro:
+    description: Rejoue la cinematique d'ouverture (Acte I) - test admin.
+    usage: /intro
+    permission: privatemines.intro
+  pnj:
+    description: Gere les PNJ de l'aventure (Actes I & II) - admin.
+    usage: /pnj <place|setting|list|tp|remove|setchest|setchest2|resetquest>
+    permission: privatemines.pnj
+    aliases: [npc]
+  particules:
+    description: Pose et gere des particules decoratives (admin).
+    usage: /particules
+    permission: privatemines.particules
+    aliases: [particles, particule]
+  pets:
+    description: Ouvre le menu des familiers (pets) par arc.
+    usage: /pets
+    aliases: [familiers, familier, pet]
+  keys:
+    description: Affiche tes cles de coffres (Commune / Rare / Legendaire).
+    usage: /keys
+    aliases: [cles, cle, key]
+  crate:
+    description: Gere les crates (coffres a recompenses) - OP.
+    usage: /crate <sethere|remove|list|givekey>
+    permission: privatemines.crate
+    aliases: [crates]
+  logpose:
+    description: Boussole du Log Pose (visite d'Alabasta) - OP. /logpose [reset]
+    usage: /logpose [reset]
+    permission: privatemines.logpose
+  mur:
+    description: Murs invisibles (barrieres) - OP. Selection au baton + repousse les non-OP.
+    usage: /mur <wand|create|list|remove|toggle|tp>
+    permission: privatemines.mur
+  jobs:
+    description: Ouvre le menu des metiers (Mineur = paliers de blocs mines).
+    usage: /jobs
+    aliases: [job, metier, metiers]
+  commande:
+    description: Ouvre l annuaire de TOUTES les commandes du serveur, avec leur description.
+    usage: /commande
+    aliases: [commandes, cmds, aide]
+  daily:
+    description: Recompenses quotidiennes (serie de 7 jours). Sous-commandes OP - reset, set.
+    usage: /daily [reset|set]
+    aliases: [quotidien]
+  fly:
+    description: Active/desactive le Vol (enchant, uniquement dans ta mine).
+    usage: /fly
+  pickaxelevel:
+    description: Fixe le niveau de pioche d'un joueur (OP).
+    usage: /pickaxelevel set <niveau> [joueur]
+    permission: privatemines.pickaxelevel
+    aliases: [piochelevel]
+  fracturelevel:
+    description: Fixe le niveau de l'enchant Fracture d'un joueur (OP).
+    usage: /fracturelevel set <niveau> [joueur]
+    permission: privatemines.fracturelevel
+  prestige:
+    description: Prestige / Renaissance des Abysses (rang, bonus de vente).
+    usage: /prestige
+    aliases: [renaissance]
+  warp:
+    description: Ouvre le menu des warps (teleportation rapide).
+    usage: /warp
+  ob:
+    description: Ton Ile - tp + reglages (setting/visit/friend) + OneBlock (Le Bloc du Grand Appel).
+    usage: /ob [setting|visit <joueur>|friend <joueur>|accept|unfriend <joueur>|help]
+    aliases: [oneblock, is]
+  collections:
+    description: Tes trouvailles rares des mines (items-cles d'arc, la Plume).
+    usage: /collections
+    aliases: [collection, collec]
+  phases:
+    description: Affiche les 12 phases du Bloc du Grand Appel (blocs, paliers).
+    usage: /phases

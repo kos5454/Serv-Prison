@@ -1,0 +1,45 @@
+# ── Build Maven ──
+target/
+*.jar
+*.class
+
+# ── Secrets : NE JAMAIS pousser ──
+# rcon-stop.js contient le mot de passe RCON du serveur en clair.
+rcon-stop.js
+*.env
+.env
+
+# ── Outillage local (chemins absolus de la machine) ──
+.mcp.json
+.serena/
+
+# ── IDE ──
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+nbproject/
+
+# ── Système ──
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ── Données de serveur : jamais dans le dépôt ──
+# (mondes, logs, données joueurs, plugins tiers)
+world/
+world_nether/
+world_the_end/
+logs/
+crash-reports/
+plugins/
+*.log
+*.log.gz
+banned-*.json
+ops.json
+whitelist.json
+usercache.json
+server.properties
+eula.txt
