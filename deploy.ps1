@@ -1,18 +1,38 @@
 # =====================================================================
 #  deploy.ps1 — Build + deploiement du plugin PrivateMines
 #  Usage : depuis n'importe ou, lance      .\deploy.ps1
-#  (ou      powershell -File "C:\Users\kos\Desktop\PrivateMines-dev\deploy.ps1")
 #
 #  Comportement : compile avec Maven. Le jar n'est copie dans le serveur
 #  QUE si le build reussit (BUILD SUCCESS). En cas d'echec, rien n'est
 #  deploye et les erreurs sont affichees.
+#
+#  Les chemins se deduisent de l'emplacement de CE fichier, donc le script
+#  marche quel que soit l'endroit ou le projet est clone. Seule la ligne
+#  $serveur ci-dessous est a adapter : c'est le dossier du serveur Minecraft.
+#  Elle peut aussi etre passee en parametre :   .\deploy.ps1 -serveur "D:\mon serveur"
 # =====================================================================
+
+param(
+    [string]$serveur = (Join-Path (Split-Path -Parent $PSScriptRoot) "Serv prison")
+)
 
 $ErrorActionPreference = "Stop"
 
-$pom      = "C:\Users\kos\Desktop\PrivateMines-dev\pom.xml"
-$jarSrc   = "C:\Users\kos\Desktop\PrivateMines-dev\target\PrivateMines.jar"
-$jarDst   = "C:\Users\kos\Desktop\Serv prison\plugins\PrivateMines.jar"
+$racine   = $PSScriptRoot
+$pom      = Join-Path $racine "pom.xml"
+$jarSrc   = Join-Path $racine "target\PrivateMines.jar"
+$jarDst   = Join-Path $serveur "plugins\PrivateMines.jar"
+
+# Si le dossier du serveur n'existe pas, autant le dire tout de suite plutot
+# que de compiler pendant une minute pour echouer a la copie.
+if (-not (Test-Path $serveur)) {
+    Write-Host ""
+    Write-Host "  Dossier serveur introuvable : $serveur" -ForegroundColor Red
+    Write-Host "  Corrige la valeur par defaut de -serveur en tete de ce script," -ForegroundColor Red
+    Write-Host "  ou lance : .\deploy.ps1 -serveur `"chemin\vers\le\serveur`"" -ForegroundColor Red
+    Write-Host ""
+    exit 1
+}
 
 Write-Host ""
 Write-Host "==================================================" -ForegroundColor Cyan
